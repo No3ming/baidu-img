@@ -2,14 +2,14 @@
   <div class="layout">
     <div class="layout-header">
       <div class="search-box">
-        <Input v-model="value" placeholder="输入搜索内容" style="width: 300px"/>
-        <Button type="primary" shape="circle" @click="onSearch">Search</Button>
+        <Input v-model="value" placeholder="输入搜索内容" style="width: 300px" @keyup.enter.native="onSearch"/>
+        <Button type="primary" shape="circle" @click="onSearch">搜索</Button>
       </div>
     </div>
     <Scroll :on-reach-bottom="handleReachBottom" class="content" :height="height" :distance-to-edge="-40">
-      <div v-for="(item, i) in list" :key="i" class="img-item" :style="{width: ((100 / item.height) * item.width) + 'px'}">
+      <div v-for="(item, i) in list" :key="i" class="img-item" :style="{width: ((150 / item.height) * item.width) + 'px'}">
         <div class="img-box">
-          <img :src="item.thumbURL" alt="" :style="{width: ((100 / item.height) * item.width) + 'px'}">
+          <img :src="item.thumbURL" alt="" :style="{width: ((150 / item.height) * item.width) + 'px'}">
         </div>
         <input type="hidden" :value="item.objURL" class="img-input"/>
         <div class="copy-box">
@@ -80,7 +80,7 @@
         this.loop++
         let data = await this.onGetData()
         this.list = this.list.concat(data)
-        if ((this.list.length < 100 || (this.loop < 100 && cat)) && this.loop < 5000) {
+        if ((this.list.length < 100 || (this.loop < 100 && cat)) && this.loop < 2000) {
           await this.loopImg(cat)
         }
       },
@@ -137,13 +137,13 @@
     position: relative;
     left: 0;
     top: 0;
-    height: 100px;
+    height: 150px;
     margin: 10px 1%;
     float: left;
     text-align: center;
   }
   .img-box {
-    height: 100px;
+    height: 150px;
     float: left;
     text-align: center;
   }
@@ -165,6 +165,8 @@
     font-size: 40px;
     cursor: pointer;
     opacity: .5;
+    background-color: rgba(0,0,0,.8);
+    color: #fff;
   }
   .copy-box:hover {
     opacity: 1;
