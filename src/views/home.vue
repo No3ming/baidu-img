@@ -9,7 +9,7 @@
     <Scroll :on-reach-bottom="handleReachBottom" class="content" :height="height" :distance-to-edge="-40">
       <div v-for="(item, i) in list" :key="i" class="img-item" :style="{width: ((150 / item.height) * item.width) + 'px'}">
         <div class="img-box">
-          <img :src="item.thumbURL" alt="" :style="{width: ((150 / item.height) * item.width) + 'px'}">
+          <img v-lazy="item.thumbURL" alt="" :style="{width: ((150 / item.height) * item.width) + 'px'}">
         </div>
         <input type="hidden" :value="item.objURL" class="img-input"/>
         <div class="copy-box">
@@ -34,7 +34,7 @@
       return {
         value: '',
         list: [],
-        height: window.innerHeight - 120,
+        height: window.innerHeight - 70,
         pn: 0,
         loop: 0
       }
@@ -127,9 +127,9 @@
   }
 
   .content {
-    margin: 20px auto 30px;
+    margin: 20px auto 0;
     width: 100%;
-    height: calc(100% - 110px);
+    height: calc(100% - 80px);
     background-color: #fff;
   }
 
